@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=n
+comment0.target=Player(java.lang.String)
+comment1.params=other\ rent
+comment1.target=void\ payRentTo(Player,\ int)
+comment2.params=value
+comment2.target=void\ addToBalance(int)
+comment3.params=value
+comment3.target=void\ takeFromBalance(int)
+numComments=4
