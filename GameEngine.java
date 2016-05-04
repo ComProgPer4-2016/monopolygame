@@ -5,6 +5,7 @@ public class GameEngine
     ArrayList<Player> pList = new ArrayList<Player>();
     Dice dice;
     int losers;
+    int t = 0;
     public GameEngine()
     {
         dice = new Dice();
@@ -17,14 +18,13 @@ public class GameEngine
     }
     public void playGame()
     {
-        board.displayBoard();
-        int t = 0;
+        board.displayBoard();        
         while (losers<3)
         {
             Player player = pList.get(t);
             boolean lost = playTurn(player);
-            if (lost) losers++; pList.remove(t);
-            t++;
+            //if (lost) losers++; pList.remove(t);
+            //t++;
             if (t==4-losers) t=0;
         }
     }

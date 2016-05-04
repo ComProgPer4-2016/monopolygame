@@ -47,12 +47,12 @@ public class Board
         {
             if (i==0)
             {
-                spaceList[i]=new Cornerspace(new ImageIcon("Images/freeparking.jpg"));
+                spaceList[i]=new Cornerspace(new ImageIcon("Images/Go.gif"));
 
             }
             else if (i==7)
             {
-                spaceList[i]=new Cornerspace(new ImageIcon("Images/freeparking.jpg"));
+                spaceList[i]=new Cornerspace(new ImageIcon("Images/jail.jpg"));
 
             }
             else
@@ -90,7 +90,7 @@ public class Board
         {
             if (i==21)
             {
-                spaceList[i]=new Cornerspace(new ImageIcon("Images/freeparking.jpg"));
+                spaceList[i]=new Cornerspace(new ImageIcon("Images/gtj.jpg"));
             }
             else if (i==14)
             {
@@ -129,7 +129,7 @@ public class Board
                 leftPanel.add(spaceList[i]);
             }
            
-
+            //leftPanel.add(spaceList[i]);
         }
 
         for (int i =0;i<28;i++)
