@@ -48,12 +48,12 @@ public class Board
         {
             if (i==0)
             {
-                spaceList[i]=new Cornerspace(new ImageIcon("Images/Go.gif"));
+                spaceList[i]=new Cornerspace(new ImageIcon("Images/Go.jpg"), false);
 
             }
             else if (i==7)
             {
-                spaceList[i]=new Cornerspace(new ImageIcon("Images/jail.jpg"));
+                spaceList[i]=new Cornerspace(new ImageIcon("Images/jail.jpg"), false);
 
             }
            
@@ -82,14 +82,13 @@ public class Board
             if(i>=8&&i<=10)
             {
                 spaceList[i] = new PropertySpace(colorList[2],i);
-                rightPanel.add(spaceList[i]);
             }
             else if(i>=11&&i<=13)
             {
                 spaceList[i] = new PropertySpace(colorList[3],i);
-                rightPanel.add(spaceList[i]);
+                
             }
-            
+            rightPanel.add(spaceList[i]);
         }
 
         bottomPanel = new JPanel();
@@ -100,23 +99,22 @@ public class Board
         {
             if (i==21)
             {
-                spaceList[i]=new Cornerspace(new ImageIcon("Images/gtj.jpg"));
+                spaceList[i]=new Cornerspace(new ImageIcon("Images/gtj.jpg"), false);
             }
             else if (i==14)
             {
-                spaceList[i]=new Cornerspace(new ImageIcon("Images/freeparking.jpg"));
+                spaceList[i]=new Cornerspace(new ImageIcon("Images/freeparking.jpg"), false);
 
             }
             
             if(i>=18&&i<=20)
             {
                 spaceList[i] = new PropertySpace(colorList[5],i);
-                bottomPanel.add(spaceList[i]);
+                
             }
             else if(i>=15&&i<=17)
             {
                 spaceList[i] = new PropertySpace(colorList[4],i);
-                bottomPanel.add(spaceList[i]);
             }
 
             bottomPanel.add(spaceList[i]);
@@ -138,25 +136,29 @@ public class Board
                 spaceList[i] = new PropertySpace(colorList[8],i);
                 leftPanel.add(spaceList[i]);
             }
-            else if(i>=22&&i<=24)//fix this shit
+            else if(i>=22&&i<=24)
             {
                 spaceList[i] = new PropertySpace(colorList[6],i);
                 leftPanel.add(spaceList[i]);
             }
            
-            //leftPanel.add(spaceList[i]);
+            
         }
 
-        for (int i =0;i<28;i++)
-        {
-            //spaceList[i].setName( FINISH THIS ABBAS
-        }
 
+        
+        
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(rightPanel, BorderLayout.EAST);
         mainPanel.add(bottomPanel,BorderLayout.SOUTH);
         mainPanel.add(leftPanel,BorderLayout.WEST);
+        JPanel monopolyContain = new JPanel();
+        monopolyContain.setLayout(new BorderLayout());
+        Cornerspace main = new Cornerspace(new ImageIcon("Images/monopolymain copy.png"), true);
+        monopolyContain.add(main, BorderLayout.CENTER);        
+        mainPanel.add(monopolyContain, BorderLayout.CENTER);
         this.drawBoard();
+        main.setPos(false);
     }
 
     public void drawBoard()
