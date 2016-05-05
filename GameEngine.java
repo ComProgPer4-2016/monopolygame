@@ -19,14 +19,14 @@ public class GameEngine
     public void playGame()
     {
         board.displayBoard();        
-        while (losers<3)
-        {
-            Player player = pList.get(t);
-            boolean lost = playTurn(player);
-            //if (lost) losers++; pList.remove(t);
-            //t++;
-            if (t==4-losers) t=0;
-        }
+//         while (losers<3)
+//         {
+//             Player player = pList.get(t);
+//             boolean lost = playTurn(player);
+//             //if (lost) losers++; pList.remove(t);
+//             //t++;
+//             if (t==4-losers) t=0;
+//         }
     }
     boolean playTurn(Player player)
     {

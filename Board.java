@@ -24,7 +24,7 @@ public class Board
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         spaceList = new Space[28];
-        colorList = new Color[8];
+        colorList = new Color[9];
         colorList[0] = new Color(99,74,18);
         colorList[1] = new Color(119,223,237);
         colorList[2] = new Color(252,63,192);
@@ -33,6 +33,7 @@ public class Board
         colorList[5] = Color.yellow;
         colorList[6] = Color.green;
         colorList[7] = Color.blue;
+        colorList[8] = Color.black;
 
  
     }
@@ -55,9 +56,18 @@ public class Board
                 spaceList[i]=new Cornerspace(new ImageIcon("Images/jail.jpg"));
 
             }
-            else
+           
+            else if(i==3)
             {
-                spaceList[i] = new PropertySpace(colorList[i/4]);
+                spaceList[i] = new PropertySpace(colorList[8], i);
+            }
+            else if(i>=1&&i<=2)
+            {
+                spaceList[i] = new PropertySpace(colorList[0], i);
+            }
+            else if(i>=4&&i<=6)
+            {
+                spaceList[i] = new PropertySpace(colorList[1],i);
             }
 
             topPanel.add(spaceList[i]);
@@ -71,12 +81,12 @@ public class Board
 
             if(i>=8&&i<=10)
             {
-                spaceList[i] = new PropertySpace(colorList[2]);
+                spaceList[i] = new PropertySpace(colorList[2],i);
                 rightPanel.add(spaceList[i]);
             }
             else if(i>=11&&i<=13)
             {
-                spaceList[i] = new PropertySpace(colorList[3]);
+                spaceList[i] = new PropertySpace(colorList[3],i);
                 rightPanel.add(spaceList[i]);
             }
             
@@ -100,12 +110,12 @@ public class Board
             
             if(i>=18&&i<=20)
             {
-                spaceList[i] = new PropertySpace(colorList[4]);
+                spaceList[i] = new PropertySpace(colorList[5],i);
                 bottomPanel.add(spaceList[i]);
             }
             else if(i>=15&&i<=17)
             {
-                spaceList[i] = new PropertySpace(colorList[5]);
+                spaceList[i] = new PropertySpace(colorList[4],i);
                 bottomPanel.add(spaceList[i]);
             }
 
@@ -116,16 +126,21 @@ public class Board
         leftPanel.setLayout(new GridLayout(6,1));
         leftPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        for(int i = 27; i>=22; i--)
+        for(int i = 28; i>=22; i--)
         {
-            if(i>=24&&i<=26)
+            if(i>=26&&i<=27)
             {
-                spaceList[i] = new PropertySpace(colorList[6]);
+                spaceList[i] = new PropertySpace(colorList[7],i);
+                leftPanel.add(spaceList[i]);
+            }
+            else if(i==25)
+            {
+                spaceList[i] = new PropertySpace(colorList[8],i);
                 leftPanel.add(spaceList[i]);
             }
             else if(i>=22&&i<=24)//fix this shit
             {
-                spaceList[i] = new PropertySpace(colorList[7]);
+                spaceList[i] = new PropertySpace(colorList[6],i);
                 leftPanel.add(spaceList[i]);
             }
            
