@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.*;
 public class Space extends JPanel
 {
+    String n;
 
     public Space()
     {

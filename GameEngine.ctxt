@@ -4,5 +4,5 @@ comment0.target=GameEngine()
 comment1.params=
 comment1.target=void\ playGame()
 comment2.params=player
-comment2.target=boolean\ playTurn(Player)
+comment2.target=void\ nextTurn(Player)
 numComments=3

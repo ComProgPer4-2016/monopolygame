@@ -32,6 +32,7 @@ public class PropertySpace extends Space implements ActionListener
     JButton cancel;
     JButton closeInfo;
     int rent;
+    Player user;
     public PropertySpace(Color c, int p)
     {
         this.setLayout(new GridLayout(5,1));
@@ -115,6 +116,7 @@ public class PropertySpace extends Space implements ActionListener
         else if (e.getSource()==yes)
         {
             //invoke buy transanction
+            
         }
         else if (e.getSource()==cancel)
         {

@@ -3,6 +3,7 @@ public class Player
 {
     String name;
     int balance;
+    boolean turn;
     public Player(String n)
     {
         name = n;
@@ -24,4 +25,16 @@ public class Player
     {
         balance -= value;
     }
+    
+    public void setTurn()
+    {
+        turn = true;
+    }
+    
+    public void nextTurn()
+    {
+        turn=false;
+    }
+    
+    
 }
