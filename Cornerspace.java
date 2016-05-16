@@ -17,9 +17,10 @@ public class Cornerspace extends Space
         i=n;
         JLabel image = new JLabel();
         image.setIcon(n);
-        this.add(image);
+        northP.add(image);
         pos = b;
-
+        spaceP.add(northP, BorderLayout.NORTH);
+        this.add(spaceP);
         /*img = null;//try catch statement to create imageIcon from a file
         try {
         img = ImageIO.read(n);//initializing img to the BufferedImage returned by invoking static accessor method read with explicit

@@ -1,6 +1,10 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Space()
-comment1.params=n
-comment1.target=void\ setName(java.lang.String)
-numComments=2
+comment1.params=p
+comment1.target=void\ remove(Player)
+comment2.params=ref
+comment2.target=javax.swing.JPanel\ getPlayerSpot(int)
+comment3.params=n
+comment3.target=void\ setName(java.lang.String)
+numComments=4

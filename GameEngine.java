@@ -1,54 +1,67 @@
 import java.util.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane; //imports JOptionPane class so it can be used in code
-public class GameEngine
+public class GameEngine implements ActionListener
 {
     Board board;
     ArrayList<Player> pList = new ArrayList<Player>();
-    ArrayList<String> nameList = new ArrayList<String>();
-    Dice dice;
+    //ArrayList<Integer> intList = new ArrayList<Integer>();
     int losers;
-    int turn;
+    int index;
+    int playerNumber;
     public GameEngine()
     {
-        dice = new Dice();
-        board = new Board();
+
         losers = 0;
-        String pN = JOptionPane.showInputDialog(null, "How many players?\nMaximum of 4." ); //invokes static method showInputDialog with implicit parameter JOptionPane,
+        index = 0;
+        String pN = JOptionPane.showInputDialog(null, "How many players?\nMaximum of 4." );
+        //invokes static method showInputDialog with implicit parameter JOptionPane,
         //and explicit paramter of "null, Player 1, enter a word", stores user input to newly constructed memory location with return type of String
-        if (pN ==null)
-            {
-               System.exit(0);
-            }
-        int playerNumber = Integer.parseInt(pN);
-        turn = playerNumber;
+        playerNumber = Integer.parseInt(pN);
+
         for (int i=1;i<playerNumber+1;i++)
         {
             String name = JOptionPane.showInputDialog(null, "Player " + i + " enter your name." );
-            nameList.add(name);
+            pList.add(new Player(name, i));
+            
             if (name ==null)
             {
-               System.exit(0);
+                System.exit(0);
             }
-            
         }
-
+        
+        board = new Board(pList);
+        board.displayBoard(); 
     }
 
     public void playGame()
     {
-        board.displayBoard();        
-        //         while (losers<3)
-        //         {
-        //             Player player = pList.get(t);
-        //             boolean lost = playTurn(player);
-        //             //if (lost) losers++; pList.remove(t);
-        //             //t++;
-        //             if (t==4-losers) t=0;
-        //         }
+        index = 0;
+
+        boolean win = false;
+        board.playTurn(pList.get(index));
+        
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource()==board.getEndTurn())
+        {
+            index++;
+            board.playTurn(pList.get(index));
+
+        }
     }
 
     public void nextTurn(Player player)
     {
-        player.setTurn();
+        player.nextTurn();
     }
+
+    public void setIndex(int x)
+    {
+        index = x;
+    }
+
 }

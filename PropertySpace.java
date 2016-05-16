@@ -35,8 +35,8 @@ public class PropertySpace extends Space implements ActionListener
     Player user;
     public PropertySpace(Color c, int p)
     {
-        this.setLayout(new GridLayout(5,1));
-        this.setBorder(BorderFactory.createLineBorder(Color.black));
+        northP.setLayout(new GridLayout(5,1));
+        northP.setBorder(BorderFactory.createLineBorder(Color.black));
         topColor = new JPanel();
         topColor.setBackground(c);
         
@@ -69,13 +69,15 @@ public class PropertySpace extends Space implements ActionListener
         bottom.add(buy);
         bottom.add(info);
         pos = p;
-        this.add(topColor);
+        northP.add(topColor);
         propertyName.setText(propertyList[p]);
-        this.add(propertyName);
+        northP.add(propertyName);
         cost.setText("$" + priceList[p]);
-        this.add(cost);
-        this.add(owner);
-        this.add(bottom);
+        northP.add(cost);
+        northP.add(owner);
+        northP.add(bottom);
+        spaceP.add(northP, BorderLayout.NORTH);
+        this.add(spaceP);
 
     }
 

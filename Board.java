@@ -4,24 +4,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.io.*;
-public class Board
+public class Board implements ActionListener
 {
     JFrame mainFrame;
     JPanel mainPanel;
     JPanel topPanel;
     JPanel rightPanel;
     JPanel bottomPanel;
+    JLabel dLabel;
     JPanel leftPanel;
+    JPanel centerPanel;
     Space[] spaceList;
+    JButton endTurn;
     File f1;
+    JPanel monopolyContain;
+    Dice d;
     Color[] colorList;
+    JButton dice;
+    ArrayList<Player> pList;
+    int pNum;
+    boolean endTurnB;
+    Player p;
+    int index;
+   
 
-    public Board()
+    public Board(ArrayList<Player> p)
     {
         mainFrame = new JFrame("Monopoly");
-        mainFrame.setSize(1000,1000);
+        mainFrame.setSize(1050,1050);
         mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setLayout(new BorderLayout(0,0));
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         spaceList = new Space[28];
         colorList = new Color[9];
@@ -34,8 +46,10 @@ public class Board
         colorList[6] = Color.green;
         colorList[7] = Color.blue;
         colorList[8] = Color.black;
-
- 
+        dLabel = new JLabel();
+        d = new Dice();
+        pList = p;
+        index = 0;
     }
 
     public void displayBoard()
@@ -56,10 +70,10 @@ public class Board
                 spaceList[i]=new Cornerspace(new ImageIcon("Images/jail.jpg"), false);
 
             }
-           
+
             else if(i==3)
             {
-                spaceList[i] = new PropertySpace(colorList[8], i);
+                spaceList[i] = new CardSpace("Community Chest", new ImageIcon("Images/ComChest.jpg"));
             }
             else if(i>=1&&i<=2)
             {
@@ -86,7 +100,7 @@ public class Board
             else if(i>=11&&i<=13)
             {
                 spaceList[i] = new PropertySpace(colorList[3],i);
-                
+
             }
             rightPanel.add(spaceList[i]);
         }
@@ -106,11 +120,11 @@ public class Board
                 spaceList[i]=new Cornerspace(new ImageIcon("Images/freeparking.jpg"), false);
 
             }
-            
+
             if(i>=18&&i<=20)
             {
                 spaceList[i] = new PropertySpace(colorList[5],i);
-                
+
             }
             else if(i>=15&&i<=17)
             {
@@ -133,7 +147,7 @@ public class Board
             }
             else if(i==25)
             {
-                spaceList[i] = new PropertySpace(colorList[8],i);
+                spaceList[i] = new CardSpace("Chance", new ImageIcon("Images/chance.jpg"));
                 leftPanel.add(spaceList[i]);
             }
             else if(i>=22&&i<=24)
@@ -141,29 +155,92 @@ public class Board
                 spaceList[i] = new PropertySpace(colorList[6],i);
                 leftPanel.add(spaceList[i]);
             }
-           
-            
+
         }
 
-
-        
-        
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(rightPanel, BorderLayout.EAST);
         mainPanel.add(bottomPanel,BorderLayout.SOUTH);
         mainPanel.add(leftPanel,BorderLayout.WEST);
-        JPanel monopolyContain = new JPanel();
+        monopolyContain = new JPanel();
         monopolyContain.setLayout(new BorderLayout());
         Cornerspace main = new Cornerspace(new ImageIcon("Images/monopolymain copy.png"), true);
-        monopolyContain.add(main, BorderLayout.CENTER);        
+        ImageIcon iCD = new ImageIcon("Images/dice.png");
+        dice = new JButton(iCD);
+        dice.setSize(iCD.getIconWidth()+4, iCD.getIconHeight()+1);
+        endTurn = new JButton();        
+        monopolyContain.add(main, BorderLayout.CENTER); 
+        monopolyContain.add(endTurn,BorderLayout.EAST);
+        monopolyContain.add(dLabel,BorderLayout.WEST);
+        monopolyContain.add(dice, BorderLayout.SOUTH);
         mainPanel.add(monopolyContain, BorderLayout.CENTER);
-        this.drawBoard();
+        mainFrame.add(mainPanel);
+        mainFrame.setVisible(true);
         main.setPos(false);
+        dice.addActionListener(this);
+        endTurn.addActionListener(this);
+
+        for (int i = 0; i<pList.size(); i++)//put everyone on Go space
+        {
+            this.add(pList.get(i),i+1, 0);
+        }
+    }
+    
+    public void add(Player p, int playerRef, int pos)
+    {
+        Space space = spaceList[pos];
+        JPanel spot = space.getPlayerSpot(playerRef);
+        spot.add(new JLabel(p.getIcon()));
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource()==dice)
+        {
+            endTurn.setText("End " + p.getName() + "'s turn");
+            int rollResult = d.roll();//roll dice and get result
+
+            dLabel.setText(p.getName()+ d.getStr());//set dLabel to announce roll result
+            
+            move(p, rollResult);//move player
+
+        }
+        if(e.getSource()==endTurn)
+        {
+            index++;
+            if (index>3) index = 0;//needs to adjust for number of players
+            playTurn(pList.get(index));
+
+        }
+
+        mainFrame.repaint();
     }
 
     public void drawBoard()
     {
+
         mainFrame.add(mainPanel);
         mainFrame.setVisible(true);
+
+    }
+
+    public void playTurn(Player player)//this changes who the active player is
+    {
+        p = player;
+    }
+
+    public JButton getEndTurn()
+    {
+        return endTurn;
+    }
+    
+    public void move(Player p, int roll)//moves player
+    {
+        Space current = spaceList[p.getPos()];//"current" is the players current space
+        current.remove(p);//remove the player from the space
+        int newSpaceInt = p.getPos() + roll; //new position of player after roll
+        if (newSpaceInt>28) newSpaceInt-=28;//adjusting for cycling
+        p.setPos(newSpaceInt);//update the pos var of the player
+        this.add(p,p.getRef(), newSpaceInt);//add the player to the board at the proper space
     }
 }
