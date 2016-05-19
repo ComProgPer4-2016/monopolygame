@@ -1,25 +1,36 @@
 import javax.swing.*;
+    import java.io.File;
 public class Player
 {
     String name;
+    JLabel imgLabel;
     int balance;
-    int reference;
     boolean turn;
     ImageIcon icon;
     int pos;
     int ref;
-    public Player(String n, int r)
+    public Player(String n, int r, File f)
     {
         name = n;
+        imgLabel = new JLabel();
         balance = 1500;
-        icon = new ImageIcon("Images/car2.jpg");
+        //icon = new ImageIcon(f.getPath());
+        icon = new ImageIcon("Images/rishab.jpg");
+
         pos = 0;
         ref = r;
+        imgLabel.setIcon(icon);
+    }
+    
+    public void withdraw(int x)
+    {
+        balance-=x;
+        System.out.println("works");
     }
     
     public int getRef()
     {
-        return reference;
+        return ref;
     }
     
     public int getPos()
@@ -68,6 +79,9 @@ public class Player
         return name;
     }
     
-
+    public JLabel getImgLabel()
+    {
+        return imgLabel;
+    }
     
 }

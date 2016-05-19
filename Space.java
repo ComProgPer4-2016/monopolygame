@@ -13,19 +13,25 @@ public class Space extends JPanel
     JPanel player2spot = new JPanel();
     JPanel player3spot = new JPanel();
     JPanel player4spot = new JPanel();
+    JPanel sidePlayerPanel;
     public Space()
     {
         spaceP = new JPanel();
         spaceP.setLayout(new BorderLayout(0,0));
-
+        //this.setPreferredSize(new Dimension(150,60));
+        
         playersP = new JPanel();
-        playersP.setLayout(new GridLayout(1,4,0,0));
+        playersP.setLayout(new GridLayout(4,1,0,0));
         playersP.add(player1spot);
         playersP.add(player2spot);
         playersP.add(player3spot);
         playersP.add(player4spot);
+        
+        sidePlayerPanel = new JPanel();
+        sidePlayerPanel.setLayout(new GridLayout(4,1));
+        
 
-        spaceP.add(playersP, BorderLayout.SOUTH);
+        spaceP.add(playersP, BorderLayout.WEST);
         
 
     }
@@ -34,8 +40,8 @@ public class Space extends JPanel
     {
         int ref = p.getRef();
         if (ref==1) player1spot.removeAll();//removes all components in a panel
-        if (ref==2) player2spot.removeAll();
-        if (ref==3) player3spot.removeAll();
+        else if (ref==2) player2spot.removeAll();
+        else if (ref==3) player3spot.removeAll();
         else player4spot.removeAll();
     }
     
@@ -51,5 +57,8 @@ public class Space extends JPanel
     {
 
     }
+    public JButton getYesButton(){return new JButton();}
+    public int getCost(int pos){return 0;}
+    public void setOwner(Player p){}
 
 }

@@ -19,7 +19,7 @@ public class Cornerspace extends Space
         image.setIcon(n);
         northP.add(image);
         pos = b;
-        spaceP.add(northP, BorderLayout.NORTH);
+        spaceP.add(northP, BorderLayout.CENTER);
         this.add(spaceP);
         /*img = null;//try catch statement to create imageIcon from a file
         try {

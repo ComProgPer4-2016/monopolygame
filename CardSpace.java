@@ -23,7 +23,7 @@ public class CardSpace extends Space
         northP.add(image);
         //pos = b;
         type = name;
-        spaceP.add(northP, BorderLayout.NORTH);
+        spaceP.add(northP, BorderLayout.CENTER);
         this.add(spaceP);
         /*img = null;//try catch statement to create imageIcon from a file
         try {

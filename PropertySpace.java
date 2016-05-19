@@ -5,11 +5,12 @@ import java.io.*;
 public class PropertySpace extends Space implements ActionListener
 {
     int pos;
+    boolean pressed;
     JLabel propertyName;
     static String[] propertyList = {"","600's Bathroom","100's Bathroom","","300's Bathroom","Little Theater","Cafeteria","","Snack Shack",
             "Commons","Counseling","Library","Campus Ministry","Quad","","200's Building",
-            "Burns Pavilion","Alumni Gym","Graham Theater","Football Field","Robotics Lab","Quad", "Faculty Lounge","Front Office",
-            "Athletics Office","","Andre House","Chech's Room"};
+            "Burns Pavilion","Alumni Gym","Graham Theater","Football Field","Robotics Lab","Quad", "Dean's Office","Faculty Lounge","Front Office",
+            "Athletics Office","Andre House","Chech's Room"};
     static int[] priceList = {0,60,60,0,100,100,120,0,140,
             140,160,180,180,200,0,220,
             220,240,260,260,280,300,300,320,
@@ -35,21 +36,22 @@ public class PropertySpace extends Space implements ActionListener
     Player user;
     public PropertySpace(Color c, int p)
     {
-        northP.setLayout(new GridLayout(5,1));
+
+        northP.setLayout(new GridLayout(4,1,0,0));
         northP.setBorder(BorderFactory.createLineBorder(Color.black));
         topColor = new JPanel();
         topColor.setBackground(c);
-        
+
         propertyName = new JLabel(propertyTitle, JLabel.CENTER);
-        
+
         cost = new JLabel("", JLabel.CENTER);
         //cost.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-        owner = new JLabel("Owner: " + ownerName, JLabel.CENTER);
+        owner = new JLabel("Owner: " + ownerName + "   " + "$" + priceList[p], JLabel.CENTER);
         //owner.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-        
+
         bottom = new JPanel();
         buy = new JButton("Buy");
-        
+
         confirmContainer = new JPanel();
         confirmContainer.setLayout(new GridLayout(1,2));
         yes = new JButton("Yes");
@@ -63,6 +65,7 @@ public class PropertySpace extends Space implements ActionListener
         closeInfo.addActionListener(this);
 
         buy.addActionListener(this);
+
         info = new JButton("Info");
         info.addActionListener(this);
         bottom.setLayout(new GridLayout(1,2));
@@ -73,10 +76,10 @@ public class PropertySpace extends Space implements ActionListener
         propertyName.setText(propertyList[p]);
         northP.add(propertyName);
         cost.setText("$" + priceList[p]);
-        northP.add(cost);
+        //northP.add(cost);
         northP.add(owner);
         northP.add(bottom);
-        spaceP.add(northP, BorderLayout.NORTH);
+        spaceP.add(northP, BorderLayout.CENTER);
         this.add(spaceP);
 
     }
@@ -87,19 +90,21 @@ public class PropertySpace extends Space implements ActionListener
         {
             buyPanel = new JPanel();
             buyPanel.setLayout(new GridLayout(5,1));
+
             buyPanel.add(topColor);
             buyPanel.add(propertyName);
             buyPanel.add(cost);
             JLabel confirm = new JLabel("Are you sure you want to buy this property?", JLabel.CENTER);
             confirm.setFont(new Font("Lucida Grande", Font.BOLD, 15));
             buyPanel.add(confirm);
+
             buyPanel.add(confirmContainer);
             buyFrame = new JFrame();
             buyFrame.setSize(400,500);
             buyFrame.add(buyPanel);
             buyFrame.setVisible(true);
         }
-        else if (e.getSource()==info)
+        if (e.getSource()==info)
         {
             infoPanel = new JPanel();
             infoPanel.setLayout(new GridLayout(4,1));
@@ -115,18 +120,35 @@ public class PropertySpace extends Space implements ActionListener
             infoFrame.add(infoPanel);
             infoFrame.setVisible(true);
         }
-        else if (e.getSource()==yes)
-        {
-            //invoke buy transanction
-            
-        }
-        else if (e.getSource()==cancel)
+
+        if  (e.getSource()==cancel)
         {
             buyFrame.dispatchEvent(new WindowEvent(buyFrame, WindowEvent.WINDOW_CLOSING));
         }
-        else if (e.getSource()==closeInfo)
+        if  (e.getSource()==yes)
+        {
+            buyFrame.dispatchEvent(new WindowEvent(buyFrame, WindowEvent.WINDOW_CLOSING));
+        }
+        if  (e.getSource()==closeInfo)
         {
             infoFrame.dispatchEvent(new WindowEvent(infoFrame, WindowEvent.WINDOW_CLOSING));
         }
+    }
+
+    public JButton getYesButton()
+    {
+        return yes;
+    }
+
+    public int getCost(int pos)
+    {
+        return priceList[pos];
+    }
+
+    public void setOwner(Player p)
+    {
+        ownerName = p.getName();
+        owner.setText("Owner: " + ownerName + "   " + "$" + priceList[p.getPos()]);
+      
     }
 }
