@@ -7,17 +7,19 @@ import javax.swing.JComponent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+//import statements
 public class Cornerspace extends Space
 {
     BufferedImage img;//declaring instance field variable img as a BufferedImage
     ImageIcon i;
     boolean pos;
-    public Cornerspace(ImageIcon n, boolean b)
+    //instance field variables
+    public Cornerspace(ImageIcon n, boolean b)//constructor for CornerSpace class
     {
         i=n;
-        JLabel image = new JLabel();
-        image.setIcon(n);
-        northP.add(image);
+        JLabel image = new JLabel();//constructs new JLabel object, referenced by 'image'
+        image.setIcon(n);//invokes mutator method 'setIcon' on JLabel object referenced by 'image' with explicit paramter 'n'
+        northP.add(image);//invokes mutator method 'add' on Jpanel object 'northP' with explicit parameter of type JLabel referenced by 'image'
         pos = b;
         spaceP.add(northP, BorderLayout.CENTER);
         this.add(spaceP);
@@ -33,7 +35,7 @@ public class Cornerspace extends Space
     {
         if(pos)
         {
-            g.drawImage(img, 500-94, 500-94, null);
+            g.drawImage(img, 500-94, 500-94, null);//invokes mutator method 'drawImage' on Graphics object referenced by 'g' with explicit parameters of varying types
         }
         else
         {
@@ -48,7 +50,7 @@ public class Cornerspace extends Space
         }
     }
 
-    public void setPos(boolean i)
+    public void setPos(boolean i)//new mutator method
     {
         pos = i;
     }

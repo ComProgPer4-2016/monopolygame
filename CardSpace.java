@@ -8,19 +8,21 @@ import javax.swing.JComponent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-public class CardSpace extends Space
+//import statements
+public class CardSpace extends Space//extends-is a type of, contains attributes of Space class
 {
     BufferedImage img;//declaring instance field variable img as a BufferedImage
     ImageIcon i;
     boolean pos = true;
     String type;
-    public CardSpace(String name, ImageIcon n)
+    //instance field variables
+    public CardSpace(String name, ImageIcon n)//constructor for Cardspace class
     {
 
         i=n;
-        JLabel image = new JLabel();
-        image.setIcon(n);
-        northP.add(image);
+        JLabel image = new JLabel();//constructs new JLabel object, referenced by 'image'
+        image.setIcon(n);//invokes mutator method 'setIcon' on JLabel object referenced by 'image' with explicit paramter 'n'
+        northP.add(image);//invokes mutator method 'add' on Jpanel object 'northP' with explicit parameter of type JLabel referenced by 'image'
         //pos = b;
         type = name;
         spaceP.add(northP, BorderLayout.CENTER);
@@ -37,7 +39,7 @@ public class CardSpace extends Space
     {
         if(pos)
         {
-            g.drawImage(img, 500-94, 500-94, null);
+            g.drawImage(img, 500-94, 500-94, null);//invokes mutator method 'drawImage' on Graphics object referenced by 'g' with explicit parameters of varying types
         }
         else
         {
@@ -52,7 +54,7 @@ public class CardSpace extends Space
         }
     }
 
-    public void setPos(boolean i)
+    public void setPos(boolean i)//new mutator method
     {
         pos = i;
     }
